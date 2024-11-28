@@ -10,12 +10,63 @@
         <li><a href="#contact">Contact</a></li>
     </ul>
 </nav>
+
 <section id="about">
     <h2>About Me</h2>
     <p>Welcome to my personal website! I am a web developer with a passion for creating beautiful and functional websites.</p>
 </section>
+
+<section id="cv">
+    <h2>CV</h2>
+    <p>Here you can find my resume and professional experiences.</p>
+</section>
+
+<section id="projects">
+    <h2>Projects</h2>
+    <p>Here are some of the projects I have worked on.</p>
+</section>
+
 <section id="contact">
     <h2>Contact</h2>
     <p>Feel free to get in touch with me!</p>
-    <p>dandewarbenjamin@gmail.com || 0828090007</p>
 </section>
+
+<footer>
+    <p>&copy; 2024 Daniel Benjamin</p>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    });
+    // Add smooth scroll effect
+    document.querySelectorAll('nav ul li a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+    });
+});
+</script>
+
