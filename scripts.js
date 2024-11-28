@@ -1,49 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('nav ul li a');
-    const sections = document.querySelectorAll('section');
     const menuToggle = document.getElementById('mobile-menu');
     const navUL = document.querySelector('nav ul');
 
-    // Function to update active link based on scroll position
+    // Function to highlight the active link based on the current page
     const setActiveLink = () => {
-        let index = sections.length;
-
-        while(--index && window.scrollY + 50 < sections[index].offsetTop) {}
-        
-        navLinks.forEach((link) => link.classList.remove('active'));
-        if (navLinks[index]) {
-            navLinks[index].classList.add('active');
-        }
+        navLinks.forEach(link => {
+            // Remove 'active' class from all links
+            link.classList.remove('active');
+            
+            // Check if the href matches the current page
+            if (link.href === window.location.href) {
+                link.classList.add('active');
+            }
+        });
     };
 
-    // Only set active link if navigation exists
-    if (navLinks.length > 0) {
-        setActiveLink();
-        window.addEventListener('scroll', setActiveLink);
+    setActiveLink();
 
-        // Add smooth scroll effect
-        navLinks.forEach(anchor => {
+    // Add smooth scroll effect only for in-page links (href starts with '#')
+    navLinks.forEach(anchor => {
+        if (anchor.getAttribute('href').startsWith('#')) {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
 
                 // Close the mobile menu after clicking
                 if (navUL.classList.contains('show')) {
                     navUL.classList.remove('show');
                 }
             });
-        });
+        }
+    });
 
-        // Toggle mobile menu
+    // Toggle mobile menu
+    if (menuToggle) {
         menuToggle.addEventListener('click', () => {
             navUL.classList.toggle('show');
         });
     }
 
-    // Check if current page is Portfolio
+    // Load GitHub repos only on portfolio.html
     if (window.location.pathname.includes('portfolio.html')) {
         fetchGitHubRepos();
     }
