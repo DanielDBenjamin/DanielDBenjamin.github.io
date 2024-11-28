@@ -1,72 +1,61 @@
-<header>
-    <h1>Daniel Benjamin</h1>
-    <p>Web Developer & Designer</p>
-</header>
-<nav>
-    <ul>
-        <li><a href="#about">About Me</a></li>
-        <li><a href="#cv">CV</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-    </ul>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Your Logo</h1>
+        </div>
+        <div class="menu-toggle" id="mobile-menu">
+            &#9776;
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<section id="about">
-    <h2>About Me</h2>
-    <p>Welcome to my personal website! I am a web developer with a passion for creating beautiful and functional websites.</p>
-</section>
+    <!-- Your website content -->
+    <section id="home">
+        <h2>Home</h2>
+        <p>Welcome to my personal website!</p>
+    </section>
 
-<section id="cv">
-    <h2>CV</h2>
-    <p>Here you can find my resume and professional experiences.</p>
-</section>
+    <section id="about">
+        <h2>About</h2>
+        <p>About me section.</p>
+    </section>
 
-<section id="projects">
-    <h2>Projects</h2>
-    <p>Here are some of the projects I have worked on.</p>
-</section>
+    <section id="services">
+        <h2>Services</h2>
+        <p>Details of services offered.</p>
+    </section>
 
-<section id="contact">
-    <h2>Contact</h2>
-    <p>Feel free to get in touch with me!</p>
-</section>
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <p>My work and projects.</p>
+    </section>
 
-<footer>
-    <p>&copy; 2024 Daniel Benjamin</p>
-</footer>
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Get in touch with me.</p>
+    </section>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('nav ul li a');
+    <footer>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
 
-        window.addEventListener('scroll', function() {
-            let current = '';
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 60) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
-                }
-            });
-        });
-    });
-    // Add smooth scroll effect
-    document.querySelectorAll('nav ul li a').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
-    });
-});
-</script>
-
+    <script src="scripts.js"></script>
+</body>
+</html>
