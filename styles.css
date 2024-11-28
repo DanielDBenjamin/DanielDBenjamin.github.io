@@ -57,3 +57,66 @@ footer {
     width: 100%;
     bottom: 0;
 }
+/* Color Palette */
+:root {
+    --primary-color: #0078D4; /* Microsoft Blue */
+    --secondary-color: #2B88D8;
+    --accent-color: #E81123;
+    --background-color: #F3F2F1;
+    --text-color: #323130;
+  }
+  
+  /* Global Styles */
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Header */
+  header {
+    background-color: var(--primary-color);
+    padding: 20px;
+    text-align: center;
+    color: white;
+  }
+  
+  /* Navigation */
+  nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  nav a:hover {
+    color: var(--accent-color);
+  }
+  
+  /* Buttons */
+  button {
+    background-color: var(--secondary-color);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  button:hover {
+    background-color: var(--accent-color);
+  }
+  
+  /* Footer */
+  footer {
+    background-color: var(--primary-color);
+    padding: 10px;
+    text-align: center;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
