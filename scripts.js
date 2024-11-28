@@ -64,7 +64,7 @@ function fetchGitHubRepos() {
                 repoElement.innerHTML = `
                     <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
                     <p>${repo.description ? repo.description : 'No description provided.'}</p>
-                    <p>⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count}</p>
+                    <p>⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count} | 📝 ${repo.language ? repo.language : 'N/A'}</p>
                 `;
 
                 repoContainer.appendChild(repoElement);
@@ -73,5 +73,6 @@ function fetchGitHubRepos() {
         .catch(error => {
             console.error('Error fetching GitHub repositories:', error);
             repoContainer.innerHTML = `<p>Unable to fetch repositories.</p>`;
+            console.log('Error fetching GitHub repositories:', error);
         });
 }
