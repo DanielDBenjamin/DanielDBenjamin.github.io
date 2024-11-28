@@ -89,6 +89,50 @@ section {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Repository Container */
+.repo-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Individual Repository Card */
+.repo {
+    background-color: #f9f9f9;
+    border: 1px solid #e1e4e8;
+    border-radius: 5px;
+    padding: 15px;
+    width: calc(33.333% - 20px); /* Three columns */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.repo:hover {
+    transform: scale(1.05);
+}
+
+/* Repository Title */
+.repo h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+}
+
+.repo h3 a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.repo h3 a:hover {
+    text-decoration: underline;
+}
+
+/* Repository Description */
+.repo p {
+    margin: 10px 0;
+    color: #555;
+}
+
 /* Footer */
 footer {
     background-color: var(--primary-color);
@@ -125,5 +169,18 @@ footer {
         cursor: pointer;
         color: white;
         font-size: 24px;
+    }
+}
+
+/* Responsive Design for Repositories */
+@media (max-width: 1024px) {
+    .repo {
+        width: calc(50% - 20px); /* Two columns */
+    }
+}
+
+@media (max-width: 600px) {
+    .repo {
+        width: 100%; /* Single column */
     }
 }

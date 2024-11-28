@@ -39,4 +39,39 @@ document.addEventListener('DOMContentLoaded', () => {
     menuToggle.addEventListener('click', () => {
         navUL.classList.toggle('show');
     });
+
+    // Fetch and display GitHub repositories
+    fetchGitHubRepos();
 });
+
+function fetchGitHubRepos() {
+    const repoContainer = document.getElementById('repos');
+    const githubUsername = 'DanielDBenjamin'; // Replace with your GitHub username
+    const reposURL = `https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=10`;
+
+    fetch(reposURL)
+        .then(response => response.json())
+        .then(repos => {
+            if (repos.message === "Not Found") {
+                repoContainer.innerHTML = `<p>GitHub user not found.</p>`;
+                return;
+            }
+
+            repos.forEach(repo => {
+                const repoElement = document.createElement('div');
+                repoElement.classList.add('repo');
+
+                repoElement.innerHTML = `
+                    <h3><a href="${repo.html_url}" target="_blank">${repo.name}</a></h3>
+                    <p>${repo.description ? repo.description : 'No description provided.'}</p>
+                    <p>⭐ ${repo.stargazers_count} | 🍴 ${repo.forks_count}</p>
+                `;
+
+                repoContainer.appendChild(repoElement);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching GitHub repositories:', error);
+            repoContainer.innerHTML = `<p>Unable to fetch repositories.</p>`;
+        });
+}
