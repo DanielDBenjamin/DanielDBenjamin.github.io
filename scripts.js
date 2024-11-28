@@ -16,32 +16,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    setActiveLink();
-    window.addEventListener('scroll', setActiveLink);
+    // Only set active link if navigation exists
+    if (navLinks.length > 0) {
+        setActiveLink();
+        window.addEventListener('scroll', setActiveLink);
 
-    // Add smooth scroll effect
-    navLinks.forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
+        // Add smooth scroll effect
+        navLinks.forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
 
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+
+                // Close the mobile menu after clicking
+                if (navUL.classList.contains('show')) {
+                    navUL.classList.remove('show');
+                }
             });
-
-            // Close the mobile menu after clicking
-            if (navUL.classList.contains('show')) {
-                navUL.classList.remove('show');
-            }
         });
-    });
 
-    // Toggle mobile menu
-    menuToggle.addEventListener('click', () => {
-        navUL.classList.toggle('show');
-    });
+        // Toggle mobile menu
+        menuToggle.addEventListener('click', () => {
+            navUL.classList.toggle('show');
+        });
+    }
 
-    // Fetch and display GitHub repositories
-    fetchGitHubRepos();
+    // Check if current page is Portfolio
+    if (window.location.pathname.includes('portfolio.html')) {
+        fetchGitHubRepos();
+    }
 });
 
 function fetchGitHubRepos() {
@@ -73,6 +78,5 @@ function fetchGitHubRepos() {
         .catch(error => {
             console.error('Error fetching GitHub repositories:', error);
             repoContainer.innerHTML = `<p>Unable to fetch repositories.</p>`;
-            console.log('Error fetching GitHub repositories:', error);
         });
 }

@@ -14,7 +14,9 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
     padding-top: 70px; /* Adjust based on header height */
+    padding-bottom: 50px; /* Adjust based on footer height */
 }
 
 /* Header */
@@ -89,6 +91,17 @@ section {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Footer */
+footer {
+    background-color: var(--primary-color);
+    padding: 10px;
+    text-align: center;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
 /* Repository Container */
 .repo-container {
     display: flex;
@@ -133,31 +146,26 @@ section {
     color: #555;
 }
 
-/* Footer */
-footer {
-    background-color: var(--primary-color);
-    padding: 10px;
-    text-align: center;
-    color: white;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .repo {
+        width: calc(50% - 20px); /* Two columns */
+    }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     nav ul {
-        display: none;
-    }
-
-    nav ul.show {
-        display: flex;
         flex-direction: column;
         background-color: var(--primary-color);
         position: absolute;
         top: 60px;
-        left: 0;
+        left: -100%;
         width: 100%;
+        transition: left 0.3s;
+    }
+
+    nav ul.show {
+        left: 0;
     }
 
     nav ul li {
@@ -172,13 +180,7 @@ footer {
     }
 }
 
-/* Responsive Design for Repositories */
-@media (max-width: 1024px) {
-    .repo {
-        width: calc(50% - 20px); /* Two columns */
-    }
-}
-
+/* Adjust Repo Cards for Mobile */
 @media (max-width: 600px) {
     .repo {
         width: 100%; /* Single column */
