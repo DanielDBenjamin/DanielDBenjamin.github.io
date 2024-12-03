@@ -2,43 +2,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('nav ul li a');
     const menuToggle = document.getElementById('mobile-menu');
     const navUL = document.querySelector('nav ul');
+    const sections = document.querySelectorAll('section');
 
-    // Function to highlight the active link based on the current page
+    // Function to highlight the active link based on scroll position
     const setActiveLink = () => {
-        navLinks.forEach(link => {
-            // Remove 'active' class from all links
-            link.classList.remove('active');
+        let index = sections.length;
 
-            // Compare the pathname to set the active class
-            if (link.getAttribute('href') === window.location.pathname.split("/").pop()) {
-                link.classList.add('active');
-            }
-        });
+        while(--index && window.scrollY + 70 < sections[index].offsetTop) {}
+        
+        navLinks.forEach((link) => link.classList.remove('active'));
+        navLinks[index].classList.add('active');
     };
 
     setActiveLink();
+    window.addEventListener('scroll', setActiveLink);
 
-    // Add smooth scroll effect only for in-page links (href starts with '#')
+    // Smooth scroll effect for all navigation links
     navLinks.forEach(anchor => {
-        if (anchor.getAttribute('href').startsWith('#')) {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const href = this.getAttribute('href');
-                if (href && href !== '#') {
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                }
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
 
-                // Close the mobile menu after clicking
-                if (navUL.classList.contains('show')) {
-                    navUL.classList.remove('show');
-                }
-            });
-        }
+            // Close the mobile menu after clicking
+            if (navUL.classList.contains('show')) {
+                navUL.classList.remove('show');
+            }
+        });
     });
 
     // Toggle mobile menu
@@ -49,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Reveal sections on scroll
-    const sections = document.querySelectorAll('section, .repo-container');
     const revealOnScroll = () => {
         sections.forEach(section => {
             const sectionTop = section.getBoundingClientRect().top;
@@ -63,9 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // Initial check
-    
-    // Load GitHub repos only on portfolio.html
-    if (window.location.pathname.includes('portfolio.html')) {
+
+    // Load GitHub repos only for portfolio section
+    const portfolioSection = document.getElementById('portfolio');
+    if (portfolioSection) {
         fetchGitHubRepos();
     }
 

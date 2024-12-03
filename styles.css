@@ -18,7 +18,7 @@
 }
 
 /* Global Styles */
-body {
+body, html {
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -28,6 +28,8 @@ body {
     padding-top: 70px; /* Adjust based on header height */
     padding-bottom: 50px; /* Adjust based on footer height */
     transition: background-color 0.3s, color 0.3s;
+    scroll-behavior: smooth;
+    overflow: hidden;
 }
 
 /* Header */
@@ -111,9 +113,26 @@ button:hover {
     transform: scale(1.05);
 }
 
-/* Sections */
+/* Main Sections */
+main {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    padding-top: 70px; /* Adjust based on header height */
+}
+
 section {
-    padding: 100px 20px 60px 20px;
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* Remove fixed padding and margins */
+    padding: 0 20px;
+    box-sizing: border-box;
     margin: 60px auto;
     max-width: 1200px;
     background-color: #ffffff;
@@ -213,6 +232,11 @@ footer {
 
     .repo {
         width: 100%;
+    }
+
+    main {
+        /* Ensure main scroll works on mobile */
+        overflow-y: scroll;
     }
 }
 
