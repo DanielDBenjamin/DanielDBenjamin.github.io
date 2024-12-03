@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', () => {
         navLinks.forEach(link => {
             // Remove 'active' class from all links
             link.classList.remove('active');
-            
-            // Check if the href matches the current page
-            if (link.href === window.location.href) {
+
+            // Compare the pathname to set the active class
+            if (link.getAttribute('href') === window.location.pathname.split("/").pop()) {
                 link.classList.add('active');
             }
         });
@@ -48,10 +48,47 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Reveal sections on scroll
+    const sections = document.querySelectorAll('section, .repo-container');
+    const revealOnScroll = () => {
+        sections.forEach(section => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+
+            if (sectionTop < screenPosition) {
+                section.classList.add('visible');
+            }
+        });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Initial check
+    
     // Load GitHub repos only on portfolio.html
     if (window.location.pathname.includes('portfolio.html')) {
         fetchGitHubRepos();
     }
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+
+    // Check for saved user preference, if any, on load of the website
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.textContent = '☀️ Light Mode';
+    }
+
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+
+        if (document.body.classList.contains('dark-mode')) {
+            darkModeToggle.textContent = '☀️ Light Mode';
+            localStorage.setItem('dark-mode', 'enabled');
+        } else {
+            darkModeToggle.textContent = '🌙 Dark Mode';
+            localStorage.setItem('dark-mode', 'disabled');
+        }
+    });
 });
 
 function fetchGitHubRepos() {
@@ -79,6 +116,9 @@ function fetchGitHubRepos() {
 
                 repoContainer.appendChild(repoElement);
             });
+
+            // Reveal repo container after loading
+            repoContainer.classList.add('visible');
         })
         .catch(error => {
             console.error('Error fetching GitHub repositories:', error);

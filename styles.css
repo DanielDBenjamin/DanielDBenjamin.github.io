@@ -1,28 +1,39 @@
 /* Color Palette */
 :root {
-    --primary-color: #0078D4; /* Microsoft Blue */
-    --secondary-color: #2B88D8;
-    --accent-color: #E81123;
-    --background-color: #F3F2F1;
-    --text-color: #323130;
+    --primary-color: #6B4226; /* Earthy Brown */
+    --secondary-color: #2F4F4F; /* Dark Slate Gray */
+    --accent-color: #4682B4; /* Steel Blue */
+    --background-color: #F5F5F5; /* Light Grey */
+    --text-color: #2E2E2E; /* Dark Grey */
+    --footer-background: #6B4226; /* Earthy Brown */
+    --button-hover: #556B2F; /* Olive Green */
+    
+    /* Dark Mode Colors */
+    --dark-background-color: #1C1C1C; /* Very Dark Gray */
+    --dark-text-color: #E0E0E0; /* Light Gray */
+    --dark-primary-color: #3C3C3C; /* Dark Gray */
+    --dark-secondary-color: #2F4F4F; /* Dark Slate Gray */
+    --dark-footer-background: #3C3C3C; /* Dark Gray */
+    --dark-button-hover: #808000; /* Olive */
 }
 
 /* Global Styles */
 body {
     background-color: var(--background-color);
     color: var(--text-color);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     padding: 0;
     min-height: 100vh;
     padding-top: 70px; /* Adjust based on header height */
     padding-bottom: 50px; /* Adjust based on footer height */
+    transition: background-color 0.3s, color 0.3s;
 }
 
 /* Header */
 header {
     background-color: var(--primary-color);
-    padding: 10px 20px;
+    padding: 15px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -30,14 +41,16 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
 }
 
 /* Logo */
 .logo h1 {
     margin: 0;
-    font-size: 24px;
-    color: white;
+    font-size: 28px;
+    color: #ffffff;
+    transition: color 0.3s;
 }
 
 /* Navigation */
@@ -49,57 +62,75 @@ nav ul {
 }
 
 nav ul li {
-    margin: 0 15px;
+    margin: 0 20px;
 }
 
 nav ul li a {
-    color: white;
+    color: #ffffff;
     text-decoration: none;
-    font-weight: bold;
-    padding: 8px 12px;
-    transition: background-color 0.3s, color 0.3s;
+    font-size: 16px;
+    position: relative;
+    transition: color 0.3s;
 }
 
-nav ul li a.active,
+nav ul li a::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: var(--accent-color);
+    transition: width 0.3s;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+    width: 100%;
+}
+
 nav ul li a:hover {
-    background-color: var(--secondary-color);
-    border-radius: 4px;
-    color: #fff;
+    color: var(--accent-color);
 }
 
 /* Buttons */
 button {
     background-color: var(--secondary-color);
     border: none;
-    color: white;
-    padding: 10px 20px;
+    color: #ffffff;
+    padding: 10px 25px;
     font-size: 16px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 25px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 button:hover {
-    background-color: var(--accent-color);
+    background-color: var(--button-hover);
+    transform: scale(1.05);
 }
 
 /* Sections */
 section {
-    padding: 2rem;
-    margin: 2rem 10%;
-    background-color: white;
+    padding: 100px 20px 60px 20px;
+    margin: 60px auto;
+    max-width: 1200px;
+    background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Footer */
 footer {
-    background-color: var(--primary-color);
-    padding: 10px;
+    background-color: var(--footer-background);
+    padding: 15px 30px;
     text-align: center;
-    color: white;
+    color: #ffffff;
     position: fixed;
     width: 100%;
     bottom: 0;
+    transition: background-color 0.3s;
 }
 
 /* Repository Container */
@@ -114,15 +145,16 @@ footer {
 .repo {
     background-color: #f9f9f9;
     border: 1px solid #e1e4e8;
-    border-radius: 5px;
-    padding: 15px;
+    border-radius: 8px;
+    padding: 20px;
     width: calc(33.333% - 20px); /* Three columns */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .repo:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Repository Title */
@@ -169,14 +201,18 @@ footer {
     }
 
     nav ul li {
-        margin: 10px 0;
+        margin: 15px 0;
     }
 
     .menu-toggle {
         display: block;
         cursor: pointer;
-        color: white;
-        font-size: 24px;
+        color: #ffffff;
+        font-size: 26px;
+    }
+
+    .repo {
+        width: 100%;
     }
 }
 
@@ -185,4 +221,73 @@ footer {
     .repo {
         width: 100%; /* Single column */
     }
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: var(--dark-background-color);
+    color: var(--dark-text-color);
+}
+
+header.dark-mode {
+    background-color: var(--dark-primary-color);
+}
+
+header.dark-mode .logo h1 {
+    color: #ffffff;
+}
+
+nav ul li a.dark-mode.active::after,
+nav ul li a.dark-mode:hover::after {
+    background: var(--dark-secondary-color);
+}
+
+nav ul li a.dark-mode:hover {
+    color: var(--dark-secondary-color);
+}
+
+button.dark-mode {
+    background-color: var(--dark-secondary-color);
+    color: #ffffff;
+}
+
+button.dark-mode:hover {
+    background-color: var(--dark-button-hover);
+}
+
+footer.dark-mode {
+    background-color: var(--dark-footer-background);
+    color: #ffffff;
+}
+
+.repo.dark-mode {
+    background-color: #2E2E2E;
+    border: 1px solid #444444;
+    color: var(--dark-text-color);
+}
+
+.repo.dark-mode a {
+    color: var(--accent-color);
+}
+
+.repo.dark-mode:hover {
+    background-color: #3E3E3E;
+}
+
+/* Fade-in Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+    animation: fadeInUp 0.6s forwards;
 }
