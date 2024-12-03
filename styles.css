@@ -61,10 +61,12 @@ nav ul {
     display: flex;
     margin: 0;
     padding: 0;
+    flex-wrap: nowrap; /* Ensure items do not wrap */
+    overflow-x: auto; /* Allow horizontal scrolling if necessary */
 }
 
 nav ul li {
-    margin: 0 20px;
+    margin: 0 10px; /* Reduced margin to prevent overflow */
 }
 
 nav ul li a {
@@ -96,6 +98,15 @@ nav ul li a:hover {
     color: var(--accent-color);
 }
 
+/* Hide scrollbar for nav ul */
+nav ul::-webkit-scrollbar {
+    display: none;
+}
+nav ul {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
 /* Buttons */
 button {
     background-color: var(--secondary-color);
@@ -118,8 +129,7 @@ main {
     display: flex;
     flex-direction: column;
     height: 100vh;
-    overflow: hidden; /* Change from scroll to hidden */
-    scroll-snap-type: none; /* Disable snap */
+    overflow: hidden; /* Prevent default scroll */
     transition: transform 0.8s ease-in-out; /* Add slide transition */
 }
 

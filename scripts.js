@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('nav ul li a');
-    // const menuToggle = document.getElementById('mobile-menu'); // Removed
     const navUL = document.querySelector('nav ul');
     const sections = document.querySelectorAll('section');
 
@@ -17,32 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
     setActiveLink();
     window.addEventListener('scroll', setActiveLink);
 
-    // Smooth scroll effect for all navigation links
+    // Smooth scroll effect with slide transition for all navigation links
     navLinks.forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
             const targetId = this.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
-                // Implement slide transition
-                document.querySelector('main').style.transform = `translateY(-${targetSection.offsetTop}px)`;
+                const main = document.querySelector('main');
+                main.style.transform = `translateY(-${targetSection.offsetTop}px)`;
             }
-
-            // Close the mobile menu after clicking
-            // if (navUL.classList.contains('show')) {
-            //     navUL.classList.remove('show');
-            // }
         });
     });
 
-    // Remove mobile menu toggle
-    // if (menuToggle) {
-    //     menuToggle.addEventListener('click', () => {
-    //         navUL.classList.toggle('show');
-    //     });
-    // }
-
-    // Reveal sections on scroll (optional remove if not needed)
+    // Reveal sections on scroll
     const revealOnScroll = () => {
         sections.forEach(section => {
             const sectionTop = section.getBoundingClientRect().top;
@@ -62,14 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (portfolioSection) {
         fetchGitHubRepos();
     }
-
-    // Remove Dark Mode Toggle
-    // const darkModeToggle = document.getElementById('dark-mode-toggle');
-
-    // Remove dark mode related code
-    // if (localStorage.getItem('dark-mode') === 'enabled') { ... }
-
-    // darkModeToggle.addEventListener('click', () => { ... });
 });
 
 function fetchGitHubRepos() {
