@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('nav ul li a');
-    const menuToggle = document.getElementById('mobile-menu');
+    // const menuToggle = document.getElementById('mobile-menu'); // Removed
     const navUL = document.querySelector('nav ul');
     const sections = document.querySelectorAll('section');
 
@@ -24,26 +24,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetId = this.getAttribute('href').substring(1);
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
-                targetSection.scrollIntoView({
-                    behavior: 'smooth'
-                });
+                // Implement slide transition
+                document.querySelector('main').style.transform = `translateY(-${targetSection.offsetTop}px)`;
             }
 
             // Close the mobile menu after clicking
-            if (navUL.classList.contains('show')) {
-                navUL.classList.remove('show');
-            }
+            // if (navUL.classList.contains('show')) {
+            //     navUL.classList.remove('show');
+            // }
         });
     });
 
-    // Toggle mobile menu
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            navUL.classList.toggle('show');
-        });
-    }
+    // Remove mobile menu toggle
+    // if (menuToggle) {
+    //     menuToggle.addEventListener('click', () => {
+    //         navUL.classList.toggle('show');
+    //     });
+    // }
 
-    // Reveal sections on scroll
+    // Reveal sections on scroll (optional remove if not needed)
     const revealOnScroll = () => {
         sections.forEach(section => {
             const sectionTop = section.getBoundingClientRect().top;
@@ -64,26 +63,13 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchGitHubRepos();
     }
 
-    // Dark Mode Toggle
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    // Remove Dark Mode Toggle
+    // const darkModeToggle = document.getElementById('dark-mode-toggle');
 
-    // Check for saved user preference, if any, on load of the website
-    if (localStorage.getItem('dark-mode') === 'enabled') {
-        document.body.classList.add('dark-mode');
-        darkModeToggle.textContent = '☀️ Light Mode';
-    }
+    // Remove dark mode related code
+    // if (localStorage.getItem('dark-mode') === 'enabled') { ... }
 
-    darkModeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-
-        if (document.body.classList.contains('dark-mode')) {
-            darkModeToggle.textContent = '☀️ Light Mode';
-            localStorage.setItem('dark-mode', 'enabled');
-        } else {
-            darkModeToggle.textContent = '🌙 Dark Mode';
-            localStorage.setItem('dark-mode', 'disabled');
-        }
-    });
+    // darkModeToggle.addEventListener('click', () => { ... });
 });
 
 function fetchGitHubRepos() {
