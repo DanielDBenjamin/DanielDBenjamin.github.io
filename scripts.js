@@ -49,6 +49,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (portfolioSection) {
         fetchGitHubRepos();
     }
+
+    // Menu toggle functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    if (menuToggle) { // Ensure menuToggle exists
+        menuToggle.addEventListener('click', () => {
+            navUL.classList.toggle('show');
+        });
+    }
 });
 
 function fetchGitHubRepos() {
