@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('nav ul li a');
-    const navUL = document.querySelector('nav ul');
+    const navUL = document.querySelector('nav ul'); // Changed from getElementById to querySelector
     const sections = document.querySelectorAll('section');
+    const menuToggle = document.getElementById('menu-toggle');
 
     // Function to highlight the active link based on scroll position
     const setActiveLink = () => {
@@ -25,6 +26,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (targetSection) {
                 const main = document.querySelector('main');
                 main.style.transform = `translateY(-${targetSection.offsetTop}px)`;
+
+                // Close the menu on link click (for mobile)
+                if (navUL.classList.contains('show')) {
+                    navUL.classList.remove('show');
+                    menuToggle.classList.remove('toggle');
+                }
             }
         });
     });
@@ -51,10 +58,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Menu toggle functionality
-    const menuToggle = document.getElementById('menu-toggle');
-    if (menuToggle) { // Ensure menuToggle exists
+    if (menuToggle) {
         menuToggle.addEventListener('click', () => {
             navUL.classList.toggle('show');
+            menuToggle.classList.toggle('toggle');
+
+            const isExpanded = navUL.classList.contains('show');
+            menuToggle.setAttribute('aria-expanded', isExpanded);
         });
     }
 });
