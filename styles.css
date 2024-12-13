@@ -60,6 +60,16 @@ nav ul {
     padding: 0;
     flex-wrap: nowrap; /* Ensure items do not wrap */
     overflow-x: auto; /* Allow horizontal scrolling if necessary */
+    transition: left 0.3s ease; /* Retain necessary transitions */
+}
+
+/* Hide scrollbar for nav ul */
+nav ul::-webkit-scrollbar {
+    display: none;
+}
+nav ul {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 nav ul li {
@@ -95,35 +105,6 @@ nav ul li a.active::after {
 nav ul li a:hover {
     color: var(--accent-color);
 }
-
-nav ul {
-    list-style: none;
-    display: flex;
-    margin: 0;
-    padding: 0;
-    flex-wrap: nowrap; /* Ensure items do not wrap */
-    overflow-x: auto; /* Allow horizontal scrolling if necessary */
-    transition: left 0.3s ease;
-}
-
-/* Hide scrollbar for nav ul */
-nav ul::-webkit-scrollbar {
-    display: none;
-}
-nav ul {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
-/* Hide scrollbar for nav ul */
-nav ul::-webkit-scrollbar {
-    display: none;
-}
-nav ul {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-
 
 /* Buttons */
 button {
